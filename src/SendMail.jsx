@@ -1,10 +1,14 @@
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { closeSendMessage } from "./features/mailSlice";
 import "./SendMail.css";
 
 function SendMail() {
+  const dispatch = useDispatch();
+  
   const {
     register,
     handleSubmit,
@@ -21,7 +25,7 @@ function SendMail() {
       <div className="sendMail__header">
         <h3>New Message</h3>
 
-        <Close className="sendMail__close" />
+        <Close onClick={() => dispatch(closeSendMessage())}  className="sendMail__close"  />
       </div>
       {/* 
     // use the useForm hook to create a form that will be used to collect the data from the user
@@ -42,7 +46,7 @@ function SendMail() {
           {...register("subject", { required: true })}
           id="subject"
           placeholder="Subject"
-          type="text"
+          type="email"
         />
         {errors.subject && (
           <p className="sendMail__error">Subject is required.</p>

@@ -44,6 +44,7 @@
 }
 
 .sendMail__error {
+    position:sticky;
     background-color: white;
     color: red;
     text-align: right;
@@ -57,6 +58,8 @@
     border: none;
     border-bottom: 1px solid whitesmoke;
     outline: none;
+    text-overflow: none;
+   
 }
 
 .sendMail__message {

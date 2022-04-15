@@ -6,11 +6,16 @@ import SidebarOption from "./SidebarOption";
 import StarIcon from '@mui/icons-material/Star';
 import { AccessTime, Duo, ExpandMore, LabelImportant, NearMe, Note, Person, Phone } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import { useDispatch } from 'react-redux'
+import { openSendMessage } from './features/mailSlice'
 
 function Sidebar() {
+
+  const dispatch = useDispatch();
   return (
     <div className="sidebar">
-      <Button className="sidebar__compose">
+      <Button className="sidebar__compose" 
+      onClick={() => dispatch(openSendMessage())} >
         <img
           src="https://www.gstatic.com/images/icons/material/colored_icons/1x/create_32dp.png"
           alt="compose"
