@@ -49,8 +49,8 @@
     align-items: center;
 }
 
-.header__right .avatar {
-    color: grey;    
+.avatar svg{
+    color: lightgray;    
     
     font-size: 2.5rem !important;
 }
