@@ -1,22 +1,40 @@
 import { Close } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import React from "react";
+
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { closeSendMessage } from "./features/mailSlice";
+import { db, collection, addDoc, serverTimestamp } from "./firebase";
+
 import "./SendMail.css";
 
 function SendMail() {
   const dispatch = useDispatch();
-  
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
+  var ref = collection(db, "emails/");
+
   const onSubmit = (formData) => {
+    // pushes the data to firebase
+    addDoc(ref, {
+      email: formData.to,
+      subject: formData.subject,
+      message: formData.message,
+      timestamp: serverTimestamp(),
+    })
+      .then(() => {
+        console.log("data written");
+        dispatch(closeSendMessage());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log(formData);
   };
 
@@ -25,7 +43,10 @@ function SendMail() {
       <div className="sendMail__header">
         <h3>New Message</h3>
 
-        <Close onClick={() => dispatch(closeSendMessage())}  className="sendMail__close"  />
+        <Close
+          onClick={() => dispatch(closeSendMessage())}
+          className="sendMail__close"
+        />
       </div>
       {/* 
     // use the useForm hook to create a form that will be used to collect the data from the user
@@ -35,7 +56,7 @@ function SendMail() {
           {...register("to", { required: true })}
           name="to"
           placeholder="To"
-          type="text"
+          type="email"
         />
 
         {errors.to && (
@@ -46,7 +67,7 @@ function SendMail() {
           {...register("subject", { required: true })}
           id="subject"
           placeholder="Subject"
-          type="email"
+          type="text"
         />
         {errors.subject && (
           <p className="sendMail__error">Subject is required.</p>
@@ -71,7 +92,6 @@ function SendMail() {
           >
             Send
           </Button>
-          <Button></Button>
         </div>
       </form>
     </div>

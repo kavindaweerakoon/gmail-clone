@@ -2,6 +2,7 @@ import {
   ArrowDropDown,
   ChevronLeft,
   ChevronRight,
+  DomainVerificationTwoTone,
   Inbox,
   KeyboardHide,
   LocalOffer,
@@ -11,12 +12,42 @@ import {
   Settings,
 } from "@mui/icons-material";
 import { Checkbox, IconButton } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./EmailList.css";
 import EmailRow from "./EmailRow";
 import Section from "./Section";
+import {
+  db,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  onSnapshot,
+} from "./firebase";
 
 function EmailList() {
+  const [emails, setEmails] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    const unsub = onSnapshot(
+      query(collection(db, "emails"), orderBy("timestamp", "desc")),
+      (querySnapshot) => {
+        const emails = querySnapshot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            data: doc.data(),
+          };
+        });
+        setLoading(false);
+        setEmails(emails);
+      });
+      return () => {
+        unsub();
+      };
+  }, []);
+
   return (
     <div className="emailList">
       <div className="emailList__settings">
@@ -53,12 +84,16 @@ function EmailList() {
         <Section Icon={LocalOffer} title="Promotions" color="green" />
       </div>
       <div className="emailList__list">
-        <EmailRow 
-        title="Hello"
-        subject="Lorem ipsum dolor sit amet"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        time="1 hour ago"
-        />
+        {emails.map(({ id, data: { email, subject, message, timestamp } }) => (
+          <EmailRow
+            id={id}
+            key={id}
+            title={email}
+            subject={subject}
+            description={message}
+            time={new Date(timestamp?.seconds * 1000).toUTCString()}
+          />
+        ))}
       </div>
     </div>
   );
