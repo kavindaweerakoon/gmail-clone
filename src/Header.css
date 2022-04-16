@@ -50,8 +50,14 @@
 }
 
 .avatar svg{
-    color: lightgray;    
-    
+    color: lightgray;        
     font-size: 2.5rem !important;
+}
+
+.avatar img {
+    border-radius: 50%;
+    width: 40px;
+    cursor: pointer;
+    
 }
  
