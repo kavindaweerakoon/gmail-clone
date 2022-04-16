@@ -44,7 +44,7 @@ function EmailList() {
         });
         setLoading(false);
         setEmails(emails);
-        localStorage.setItem("emailCount", emails.length);
+        localStorage.setItem("emailCount", JSON.stringify(emails.length));
       });
       return () => {
         unsub();
