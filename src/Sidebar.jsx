@@ -12,6 +12,7 @@ import { openSendMessage } from './features/mailSlice'
 function Sidebar() {
 
   const dispatch = useDispatch();
+  const emailCount = localStorage.getItem("emailCount") || 0;
   return (
     <div className="sidebar">
       <Button className="sidebar__compose" 
@@ -22,13 +23,13 @@ function Sidebar() {
         />
         Compose
       </Button>
-      <SidebarOption Icon={InboxIcon} title="Inbox" number={54} />
-      <SidebarOption Icon={StarIcon} title="Starred" number={54} />
-      <SidebarOption Icon={AccessTime} title="Snoozed" number={54} />
-      <SidebarOption Icon={LabelImportant} title="Important" number={54} />
-      <SidebarOption Icon={NearMe} title="Sent" number={54} />
-      <SidebarOption Icon={Note} title="Drafts" number={54} />
-      <SidebarOption Icon={ExpandMore} title="More" number={54} />
+      <SidebarOption Icon={InboxIcon} title="Inbox" number={emailCount} />
+      <SidebarOption Icon={StarIcon} title="Starred"  />
+      <SidebarOption Icon={AccessTime} title="Snoozed"  />
+      <SidebarOption Icon={LabelImportant} title="Important"  />
+      <SidebarOption Icon={NearMe} title="Sent"  />
+      <SidebarOption Icon={Note} title="Drafts"  />
+      <SidebarOption Icon={ExpandMore} title="More"  />
 
       <div className="sidebar__footer">
         <div className="sidebar__footerIcons">

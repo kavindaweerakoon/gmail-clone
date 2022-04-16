@@ -29,6 +29,8 @@ function EmailList() {
   const [emails, setEmails] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+
   useEffect(() => {
     setLoading(true);
     const unsub = onSnapshot(
@@ -42,6 +44,7 @@ function EmailList() {
         });
         setLoading(false);
         setEmails(emails);
+        localStorage.setItem("emailCount", emails.length);
       });
       return () => {
         unsub();
