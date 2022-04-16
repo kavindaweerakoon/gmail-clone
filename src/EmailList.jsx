@@ -27,12 +27,11 @@ import {
 
 function EmailList() {
   const [emails, setEmails] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  
 
 
   useEffect(() => {
-    setLoading(true);
+    
     const unsub = onSnapshot(
       query(collection(db, "emails"), orderBy("timestamp", "desc")),
       (querySnapshot) => {
@@ -42,7 +41,7 @@ function EmailList() {
             data: doc.data(),
           };
         });
-        setLoading(false);
+        
         setEmails(emails);
         localStorage.setItem("emailCount", JSON.stringify(emails.length));
       });
