@@ -18,8 +18,7 @@ import EmailRow from "./EmailRow";
 import Section from "./Section";
 import {
   db,
-  collection,
-  getDocs,
+  collection,  
   orderBy,
   query,
   onSnapshot,
