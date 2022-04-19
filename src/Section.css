@@ -21,3 +21,10 @@
   background-color: whitesmoke;
   border-width: 3px !important;
 }
+
+
+@media only screen and (max-width: 768px) {
+  .section {
+    min-width: calc((100vw/3) - 40%);
+  }
+}

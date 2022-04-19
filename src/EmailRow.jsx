@@ -26,16 +26,24 @@ function EmailRow({ id, title, subject, description, time }) {
     navigate(`/mail/`);
   };
 
+  const dateObject = new Date(time).toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+
   return (
     <div onClick={openMail} className="emailRow">
       <div className="emailRow__options">
-        <Checkbox />
-        <IconButton>
-          <StarBorderOutlined />
-        </IconButton>
-        <IconButton>
-          <LabelImportantOutlined />
-        </IconButton>
+        <div className="showButton">
+          <Checkbox />
+          <IconButton>
+            <StarBorderOutlined />
+          </IconButton>
+
+          <IconButton>
+            <LabelImportantOutlined />
+          </IconButton>
+        </div>
       </div>
       <div className="emailRow__title">
         <h3>{title}</h3>
@@ -47,7 +55,7 @@ function EmailRow({ id, title, subject, description, time }) {
         </h4>
       </div>
       <div className="emailRow__time">
-        <p>{time}</p>
+        <p>{dateObject}</p>
       </div>
     </div>
   );

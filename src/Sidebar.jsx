@@ -39,6 +39,18 @@ function Sidebar() {
         />
         Compose
       </Button>
+
+      <Button
+        className="sidebar__compose--mobile"
+        onClick={() => dispatch(openSendMessage())}
+      >
+        <img
+          src="https://www.gstatic.com/images/icons/material/colored_icons/1x/create_32dp.png"
+          alt="compose"
+        />        
+      </Button>
+
+
       <div className="inbox"  onClick={handleClick}>
         <SidebarOption Icon={InboxIcon} title="Inbox" number={emailCount} />
       </div>
