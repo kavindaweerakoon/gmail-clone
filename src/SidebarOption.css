@@ -1,4 +1,5 @@
-.sidebarOption {
+.sidebarOption,
+.sidebarOption--mobile {
     display: flex;
     align-items: center;
     height: 40px;
@@ -8,6 +9,10 @@
     cursor: pointer;   
     color: #818181;
     
+}
+
+.sidebarOption--mobile {
+    display: none;
 }
 
 .sidebarOption:hover,
@@ -43,5 +48,19 @@
     display: inline;
 }
 
+
+@media only screen and (max-width: 768px) {
+    
+    
+    
+    .sidebarOption {
+        display: none;
+    }
+    
+    .sidebarOption--mobile {
+        display: flex;
+    }
+
+}
 
 
