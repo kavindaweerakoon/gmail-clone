@@ -66,3 +66,21 @@
     flex: 1;
 }
 
+@media only screen and (max-width: 760px) {
+    .sendMail {
+        width: 70%;
+        height: 70%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .sendMail {
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        right: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border: none;
+    }
+}
